@@ -1,9 +1,13 @@
 <script setup>
 
+
+import LoginDialog from "@/components/LoginDialog.vue";
 </script>
 
 <template>
   <div class="login-back"/>
+
+  <LoginDialog/>
 
 
 </template>
@@ -15,10 +19,8 @@
   width: 100vw;
   background-image: url('@/assets/login_back.jpg');
   background-size: cover;
-  background-position: center
+  background-position: center;
+  z-index: -1
 }
-
-
-
 
 </style>
