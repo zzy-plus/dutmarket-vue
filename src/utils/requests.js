@@ -10,7 +10,7 @@ axios.defaults.timeout = 10000
 //响应拦截器
 axios.interceptors.response.use(res=>{
     if(res.data.code === code.NEED_LOGIN){
-        window.location.href = '/'
+        window.location.href = '/login'
     }
 
     return res //该返回对象会传到请求方法的响应对象中
