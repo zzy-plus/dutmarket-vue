@@ -1,8 +1,11 @@
 <script setup>
-
 import {RouterView, useRouter} from "vue-router";
 
 const router = useRouter()
+
+const onClickPublish = ()=>{
+  router.push('/publish')
+}
 
 
 </script>
@@ -14,7 +17,7 @@ const router = useRouter()
         <el-input style="width: 70%"/> <el-button type="primary">搜索</el-button>
       </div>
 
-      <div style="padding: 10px"><el-button>发布</el-button></div>
+      <div style="padding: 10px"><el-button @click="onClickPublish">发布</el-button></div>
 
       <div style="padding: 10px"><el-button>记录</el-button></div>
 

@@ -20,6 +20,10 @@ const router = createRouter({
         {
           path: '/detail',
           component: ()=> import("@/views/GoodsDetailView.vue")
+        },
+        {
+          path: '/publish',
+          component: ()=> import("@/views/PublishView.vue")
         }
       ]
     },{
