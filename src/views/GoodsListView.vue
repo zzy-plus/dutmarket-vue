@@ -1,25 +1,27 @@
 <script setup>
 import GoodsCart from "@/components/GoodsCart.vue";
 import {request} from "@/utils/requests.js";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {Msg} from "@/utils/ElMessage.js";
 import cfg from "@/config.js";
 import {useStore} from "@/stores/store.js";
 
 const store = useStore()
-
 const imgDownloadUrl = `${cfg.baseUrl}/common/download?name=`
+const {goodsData} = defineProps({
+  goodsData: Object
+})
+
+watch(()=>goodsData, (value)=>{
+  getGoodsList()
+})
 
 const curPage = ref(1)
 const pageSize = ref(30)
-const goodsData = ref({
-  name: '',
-  category: -1
-})
 const goodsList = ref([])
 const getGoodsList = async ()=>{
   const resp = await request.get(`/api/goods?curPage=${curPage.value}&pageSize=${pageSize.value}
-                                  &name=${goodsData.value.name}&category=${goodsData.value.category}`)
+  &name=${goodsData.name}&category=${goodsData.category}`)
   if(resp.data.code === 0){
     goodsList.value = resp.data.data.records
   }else{
