@@ -17,33 +17,33 @@ watch(()=>goodsData, (value)=>{
 })
 
 const curPage = ref(1)
-const pageSize = ref(30)
+const pageSize = ref(16)
+const total = ref(0)
 const goodsList = ref([])
 const getGoodsList = async ()=>{
   const resp = await request.get(`/api/goods?curPage=${curPage.value}&pageSize=${pageSize.value}
   &name=${goodsData.name}&category=${goodsData.category}`)
   if(resp.data.code === 0){
     goodsList.value = resp.data.data.records
+    total.value = resp.data.data.total
   }else{
     Msg.error(resp.data.msg)
   }
 }
 
-const getCategoryList = async ()=>{
-  const resp = await request.get('/api/category')
-  if(resp.data.code === 0){
-    store.setCategory(resp.data.data)
-  }
-}
 
 onMounted(()=>{
   getGoodsList()
-  getCategoryList()
 })
 
 const onMclick = (id)=>{
   console.log(id)
 }
+
+const onPageChange = ()=>{
+  getGoodsList()
+}
+
 
 </script>
 
@@ -54,13 +54,25 @@ const onMclick = (id)=>{
                  @click="onMclick"/>
     </div>
   </div>
-  <div style="height: 50px; background-color: red"></div>
+  <div class="pagination-container">
+    <el-pagination
+        style="position: relative; left: 20px; top: 10px; width: 400px;"
+        size="small"
+        background
+        :page-size="pageSize"
+        layout="prev, pager, next"
+        :total="total"
+        v-model:current-page="curPage"
+        pager-count="11"
+        @current-change="onPageChange"
+    />
+  </div>
 
 </template>
 
 <style scoped>
   .list-container{
-    height: 90%;
+    height: 94%;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -71,5 +83,9 @@ const onMclick = (id)=>{
   }
   .goods-container{
     margin: 10px;
+  }
+  .pagination-container{
+    box-shadow: 0 -5px 5px rgba(255, 255, 255, 0.48);
+    position: relative;
   }
 </style>

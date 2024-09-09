@@ -1,9 +1,12 @@
 <script setup>
 import {RouterView, useRouter} from "vue-router";
-import {ref, watch} from "vue";
+import {ref, watch, onMounted} from "vue";
 import {Search} from "@element-plus/icons-vue";
 import SingleSelector from "@/components/SingleSelector.vue";
+import {request} from "@/utils/requests.js";
+import {useStore} from "@/stores/store.js";
 
+const store = useStore()
 const router = useRouter()
 
 const onClickPublish = ()=>{
@@ -29,25 +32,30 @@ const onSearch = ()=>{
   searchRef.value.blur()
 }
 
-
-const dataTest = ref([
-  {
-    label: 'a',
-    value: 1
-  },
-  {
-    label: 'b',
-    value: 2
-  },
-  {
-    label: 'c',
-    value: 3
+const categorys = ref([])
+const getCategoryList = async ()=>{
+  const resp = await request.get('/api/category')
+  if(resp.data.code === 0){
+    let categoryArr = new Array(...resp.data.data)
+    categoryArr.unshift({
+      name: '全部',
+      categoryNum: -1
+    })
+    categorys.value = categoryArr
+    store.setCategory(resp.data.data)
   }
-])
+}
 
-const testModel = ref('')
-const onChange = (v)=>{
-  console.log(v)
+onMounted(()=>{
+  getCategoryList()
+})
+
+
+const onCategoryChange = (category)=>{
+  goodsData.value = {
+    name: newGoodsData.value.name,
+    category: category
+  }
 }
 
 </script>
@@ -67,9 +75,8 @@ const onChange = (v)=>{
 
       <div style="padding: 10px"><el-button>记录</el-button></div>
 
-      <div style="padding: 10px"><el-button>类别</el-button></div>
 
-      <SingleSelector :options="dataTest" @onChange="onChange"/>
+      <SingleSelector :options="categorys" @onChange="onCategoryChange"/>
 
     </div>
     <div class="container">
@@ -90,7 +97,7 @@ const onChange = (v)=>{
   .menu {
     height: 100%;
     width: 20%;
-    background-color: orange;
+    background-color: #7fb7de;
     display: flex;
     flex-direction: column;
     //justify-content: space-around;
