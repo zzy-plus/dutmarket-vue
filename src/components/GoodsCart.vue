@@ -35,6 +35,9 @@ const onClick = ()=>{
     width: 250px;
     background-color: #ffffff;
     box-shadow: 3px 10px 5px 1px rgba(0, 0, 0, 0.3);
+    &:hover{
+      box-shadow: 3px 10px 5px 2px rgba(255, 114, 14, 0.5);
+    }
   }
   .img{
     height: 234px;

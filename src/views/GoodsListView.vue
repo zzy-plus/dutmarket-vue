@@ -5,7 +5,11 @@ import {onMounted, ref, watch} from "vue";
 import {Msg} from "@/utils/ElMessage.js";
 import cfg from "@/config.js";
 import {useStore} from "@/stores/store.js";
+import {useRouter, useRoute} from "vue-router";
 
+
+const router = useRouter()
+const route = useRoute()
 const store = useStore()
 const imgDownloadUrl = `${cfg.baseUrl}/common/download?name=`
 const {goodsData} = defineProps({
@@ -36,8 +40,8 @@ onMounted(()=>{
   getGoodsList()
 })
 
-const onMclick = (id)=>{
-  console.log(id)
+const showGoodsDetail = (id)=>{
+  router.push('/detail/' + id)
 }
 
 const onPageChange = ()=>{
@@ -51,7 +55,7 @@ const onPageChange = ()=>{
   <div class="list-container">
     <div v-for="goods in goodsList" class="goods-container">
       <GoodsCart :id="goods.id" :name="goods.name" :price="goods.price" :image="imgDownloadUrl + goods.mainImg"
-                 @click="onMclick"/>
+                 @click="showGoodsDetail"/>
     </div>
   </div>
   <div class="pagination-container">

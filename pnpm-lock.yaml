@@ -20,6 +20,9 @@ dependencies:
   vue:
     specifier: ^3.4.29
     version: 3.5.0
+  vue-image-lightbox:
+    specifier: ^7.2.0
+    version: 7.2.0
   vue-router:
     specifier: ^4.3.3
     version: 4.4.3(vue@3.5.0)
@@ -58,6 +61,12 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.25.6
+
+  /@babel/runtime@7.9.2:
+    resolution: {integrity: sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==}
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
 
   /@babel/types@7.25.6:
     resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
@@ -846,6 +855,11 @@ packages:
       is-glob: 4.0.3
     dev: true
 
+  /hammerjs@2.0.8:
+    resolution: {integrity: sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==}
+    engines: {node: '>=0.8.0'}
+    dev: false
+
   /is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -1029,6 +1043,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /regenerator-runtime@0.13.11:
+    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
+    dev: false
 
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
@@ -1229,6 +1247,18 @@ packages:
         optional: true
     dependencies:
       vue: 3.5.0
+    dev: false
+
+  /vue-image-lightbox@7.2.0:
+    resolution: {integrity: sha512-Gykb05xg3tHqUKny/p4pjHp2B68izo5vOg6meUAZd3oKSc+eqQvd9q54n0L94KBkF2m8zjusKMP1tdhu150VOQ==}
+    dependencies:
+      '@babel/runtime': 7.9.2
+      hammerjs: 2.0.8
+      vue-lazyload: 1.3.5
+    dev: false
+
+  /vue-lazyload@1.3.5:
+    resolution: {integrity: sha512-SCO/LWgCCbjaregHO4wg2buzITBdPBZRlIS104vERGpT88uxXsK26veuzZpgGAXMR8WpkaR+JDqz80OedpaLiA==}
     dev: false
 
   /vue-router@4.4.3(vue@3.5.0):
