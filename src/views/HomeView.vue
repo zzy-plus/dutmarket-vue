@@ -6,6 +6,7 @@ import SingleSelector from "@/components/SingleSelector.vue";
 import {request} from "@/utils/requests.js";
 import {useStore} from "@/stores/store.js";
 import {Setting} from "@element-plus/icons-vue";
+import PopOver from "@/components/PopOver.vue";
 
 const store = useStore()
 const router = useRouter()
@@ -96,15 +97,28 @@ const onCategoryChange = (category)=>{
         <SingleSelector :options="categorys" @onChange="onCategoryChange"/>
       </div>
 
+      <PopOver>
+        <template #content>
+          <div style="background-color: #ff5810; font-size: 18px; font-weight: bold; color: white; padding: 5px; width: 100px; cursor: pointer">
+            <div>我的发布</div>
+            <div>个人资料</div>
+            <div>退出登录</div>
+          </div>
 
-      <div class="my-info">
-        <div><el-avatar :size="26" :src="circleUrl" /></div>
-        <div class="user-label">
-          {{myInfo.nickname}}
-        </div>
-        <el-icon size="23" color="black"><Setting/></el-icon>
+        </template>
+        <template #default>
+          <div class="my-info">
+            <div><el-avatar :size="26" :src="circleUrl" /></div>
+            <div class="user-label">
+              {{myInfo.nickname}}
+            </div>
+            <el-icon size="23" color="black"><Setting/></el-icon>
+          </div>
+        </template>
+      </PopOver>
 
-      </div>
+
+
 
     </div>
     <div class="container">
